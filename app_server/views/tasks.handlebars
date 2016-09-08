@@ -1,0 +1,247 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">☰</a>
+
+            </li>
+<!--            <li>-->
+<!--                <a href="" class="active">Tasks</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="#">Project Info</a>-->
+<!--            </li>-->
+          
+            <li>
+                <a href="/">All Projects</a>
+            </li>
+            <li>
+                <a class="nav-link page-scroll" data-toggle="modal" data-target="#myModal">Delete Project</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <!--TOP PROJECT CARD-->
+                   <div class="row">
+                        <div class="card-group">
+                            {{#each row}}
+                            <!-- card -->
+                            <div class="square ">
+                                <div class="card col-xs-12">
+                                    <div class="card-block">
+
+                                        <h4 class="card-title">{{title}}
+                                            
+                                                <a href="#" class="pull-right">
+                                                    <img id="new-task" src="/img/add.svg" value="Toggle"/>
+                                                </a>
+                                            
+                                            </h4>
+
+                                        <p class="card-text">
+                                            <span>Client:</span> {{client}}
+                                            <br>
+                                            <span>Due Date:</span> {{enddate}}
+                                            <br>
+                                            <span>Notes</span> {{notes}}
+                                        </p>
+                                   </div>
+                                </div>
+                            </div>
+                            <!-- card -->
+                            {{/each}}
+                        </div>
+                    </div>
+                    
+                    
+                    <!--TASKS COLLAPSED-->
+                    <div class="row">
+                      <div class="card-group">
+                          {{#each tasks}}
+                            <!-- card -->
+                            <div class="square task" type="hidden" taskid="{{id}}" title="{{title}}" hours="{{hours}}" notes="{{notes}}" project_id="{{project_id}}">
+                                <div class="hoursValue" type="hidden">{{hours}}</div>
+                                <div class="card col-xs-12 col-sm-6 ">
+                                    <a href="#">
+                                    <div class="card-block">
+                                            <h4 class="card-title">{{title}}</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- card -->
+
+                            {{/each}}
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <!-- NEW TASK -->
+                    <div class="row">
+                      <div class="col-xs-12">
+                           <div id="new-task-top">
+                                <div class="new-task-form">
+                                    <form class="new-task-form" method="POST">
+                                        <button type="button" class="close closeMe">x</button>
+                                        {{#each row}}
+                                        <input id="new_project_id" type="hidden" value="{{id}}" /> 
+                                        {{/each}}
+
+                                        <div class="row">
+                                            <span class="edit-title-t">Title:</span>
+
+                                            <input type="text" id="newtasktitle" class="tasktitle newform"  value="">
+
+                                            <span class="edit-title">Hours:</span>
+
+                                            <input type="text" id="newtaskhours" class="taskhours newform"  value="">
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-xs-8 notes-container">
+                                                
+                                                <div class="col-xs-12">
+                                                    <span id="task-notes" class="newnotes">Notes:</span>
+                                                </div>
+                                                
+                                                <textarea tarea rows="4" type="text" id="newtasknotes" class="col-xs-11 newform "  value=""></textarea>
+                                                
+                                                    
+                                            </div>
+                                        </div>
+
+                                        <div class="row btn-row">
+
+                                            <button id="new-task-submit" type="submit" class="btn primary-btn submit-new">Submit</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!--EDIT TASK-->
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="edit-task">
+                                <div class="edit-task-form">
+                                    <button type="button" class="close closeMee">x</button>
+                                    <form class="edit-task-form-inner" method="PUT">
+                                        <input id="id" type="hidden" value="" />
+                                        <input id="project_id" type="hidden" value="" />
+                                        <div class="row">
+
+                                            <input type="text" class="inside-project-form" id="tasktitle" name="title" value="" readOnly>
+
+
+                                            <span class="edit-title" id="hours-title">Hours:</span>
+
+
+                                            <input type="text" class="inside-project-form hourInput" id="taskhours" name="hours" value="" readOnly>
+
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-xs-8 notes-container">
+                                                <div class="col-xs-12">
+                                                    <span id="task-notes" class="">Notes:</span>
+                                                </div>
+                                                <textarea rows="4" type="text" class="inside-project-form col-xs-11" id="tasknotes" name="notes" value="" readOnly>
+                                                </textarea>
+                                            </div>
+                                            <div class="col-xs-2 pull-right task-chart">
+                                                <div class="row canvas-holder">
+                                                    <canvas id="canvas" height="170" width="170"></canvas>
+                                                </div>
+                                                <div class="row record-group">
+                                                    <div id="record"></div><span id="recordText">Record Time</span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row btn-row">
+                                            <button class="btn primary-btn" id="edit-toggle">Edit</button>
+                                            <button id="task-submit-change" type="submit" class="btn primary-btn">Submit</button>
+                                            <button type="submit" class="btn primary-btn " id="delete-task" value="">Delete</button>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="text-center">
+                                    <button type="button" class="close" data-dismiss="modal">x</button>
+
+
+                                </div>
+                                <div class="modal-body">
+                                    <h4 class="modal-title">delete project?</h4>
+                                    <div class="contactUs">
+
+                                        <form class="formContactUs" role="form" action="/process" method="POST">
+
+
+                                            {{#each row}}
+
+                                            <input type="hidden" id="projectId" value="{{id}}" /> {{/each}}
+
+
+
+
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                    </div>
+                                                    <div class="col-sm-12 text-center">
+                                                        <button id="dp" type="submit" class="btn btn-default">Delete</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>

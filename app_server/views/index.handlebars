@@ -1,0 +1,169 @@
+<nav id="topNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <button class="navbar-toggler hidden-md-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+            ☰
+        </button>
+        <div class="collapse navbar-toggleable-md" id="collapsingNavbar">
+          
+               
+
+                    <a href="/about" id="aboutLink">About</a>
+           
+            
+            
+        
+                
+            <ul class="nav navbar-nav pull-xs-right">
+                
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" data-toggle="modal" data-target="#myModal"><img id="new-project" src="/img/add.svg"/></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<section id="one">
+    <div class="container wow fadeInUp">
+
+       
+        <div class="card-group">
+            {{#each row}}
+            
+            <!-- card -->
+          
+            <div class="square">
+            <div class="card col-xs-12 col-sm-6 ">
+                <a href="/tasks/{{id}}">
+                    
+                    <div class="card-block ">
+                    <h4 class="card-title">{{title}}</h4>
+                    <p class="card-text">
+                        <span>Client:</span> {{client}}
+                        <br>
+                        <span>Due Date:</span> {{enddate}}
+                    </p>
+                        
+                    </div>
+                </a>    
+            </div>
+        
+            </div>
+            <!-- card -->
+            
+            {{/each}}
+      
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Project</h4>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="contactUs">
+
+                    <form class="formContactUs" role="form" action="/process" method="POST">
+
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">
+                                Title</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="title" required>
+                            </div>
+
+
+
+
+
+                            <label class="col-sm-2 control-label">
+                                Client </label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="client" required>
+                            </div>
+                            <br>
+                            <br>
+
+                            
+                            <label class="col-sm-2 control-label">
+                                Start Date </label>
+
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" name="SD" required>
+                            </div>
+                            
+                            <label class="col-sm-2 control-label">
+                                End Date </label>
+
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" name="ED" required>
+                            </div>
+
+                            <br>
+                            <br>
+                            
+                            <label class="col-sm-12 control-label">
+                                Notes </label>
+
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="fieldNotes" name="notes" required>
+                            </div>
+                            <br>
+
+
+                
+                            <br>
+                            <br>
+                            <br>
+
+
+
+
+
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                    </div>
+                                    <div class="col-sm-4  pull-right">
+                                        <button type="submit" class="btn btn-default">Submit</button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- End of form-group -->
+
+                    </form>
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
